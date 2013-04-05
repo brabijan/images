@@ -6,7 +6,9 @@
 	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
 	"authors": [
 		{
-			"name": "Jan Brabec",
+			"name": "Jan Brabec"
+		},
+		{
 			"name": "Filip Procházka"
 		}
 	],
