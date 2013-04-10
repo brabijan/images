@@ -8,6 +8,10 @@ use Nette,
 	Nette\Latte\Compiler,
 	Brabijan\Images\ImagePipe;
 
+/**
+ * @author Jan Brabec <brabijan@gmail.com>
+ * @author Filip Procházka <filip@prochazka.su>
+ */
 class ImagesMacro extends Nette\Latte\Macros\MacroSet {
 
 	/**
