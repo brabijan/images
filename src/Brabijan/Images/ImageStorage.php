@@ -48,6 +48,14 @@ class ImageStorage extends Nette\Object {
 		return $this;
 	}
 
+	public function setImagesDir($dir) {
+		if (!is_dir($dir)) {
+			umask(0);
+			mkdir($dir, 0777);
+		}
+		$this->imagesDir = $dir;
+	}
+
 	/**
 	 * @param FileUpload $file
 	 * @return Image
