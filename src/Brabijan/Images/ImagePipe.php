@@ -1,0 +1,135 @@
+<?php
+
+namespace Brabijan\Images;
+
+use Nette;
+
+/**
+ * @author Jan Brabec <brabijan@gmail.com>
+ */
+class ImagePipe extends Nette\Object {
+
+	/** @var string */
+	private $assetsDir;
+
+	/** @var string */
+	private $wwwDir;
+
+	/** @var string */
+	private $path;
+
+	/** @var string */
+	private $originalPrefix = "original";
+
+	/** @var string */
+	private $baseUrl;
+
+	/** @var string|null */
+	private $namespace = null;
+
+	public function __construct($assetsDir, $wwwDir, Nette\Http\Request $httpRequest) {
+		$this->wwwDir = $wwwDir;
+		$this->assetsDir = $assetsDir;
+		$this->baseUrl = rtrim($httpRequest->url->baseUrl, '/');
+	}
+
+	public function setPath($path) {
+		$this->path = $path;
+	}
+
+	public function setAssetsDir($dir) {
+		$this->assetsDir = $dir;
+	}
+
+	public function getAssetsDir() {
+		return $this->assetsDir;
+	}
+
+	public function getPath() {
+		return $this->path !== null ? $this->path : $this->baseUrl . str_replace($this->wwwDir, '', $this->assetsDir);
+	}
+
+	public function setOriginalPrefix($originalPrefix) {
+		$this->originalPrefix = $originalPrefix;
+	}
+
+	private function checkSettings() {
+		if( $this->assetsDir == NULL )
+			throw new Nette\InvalidStateException("Dir is not setted");
+		if( !file_exists($this->assetsDir) )
+			throw new Nette\InvalidStateException("Dir does not exists");
+		if( $this->getPath() == NULL )
+			throw new Nette\InvalidStateException("Path is not setted");
+	}
+
+	public function setNamespace($namespace) {
+		if(empty($namespace)) {
+			$this->namespace = null;
+		}
+		else {
+			$this->namespace = $namespace . DIRECTORY_SEPARATOR;
+		}
+		return $this;
+	}
+
+	public function request($image, $size = null, $flags = null) {
+		$this->checkSettings();
+		if($size === null)
+			return $this->getPath().$this->namespace.$this->originalPrefix."/".$image;
+
+		list($width, $height) = explode("x", $size);
+		if( $flags == null ) {
+			$flags = Nette\Image::FIT;
+		}
+		elseif(!is_int($flags)) {
+			switch( strtolower($flags) ):
+				case "fit": $flags = Nette\Image::FIT;
+					break;
+				case "fill": $flags = Nette\Image::FILL;
+					break;
+				case "exact": $flags = Nette\Image::EXACT;
+					break;
+				case "shrink_only": $flags = Nette\Image::SHRINK_ONLY;
+					break;
+				case "stretch": $flags = Nette\Image::STRETCH;
+					break;
+			endswitch;
+			if( !isset($flags) )
+				throw new Nette\Latte\CompileException('Mode is not allowed');
+		}
+
+		$thumbPath = "/".$this->namespace.$flags."_".$width."x".$height."/".$image;
+		$thumbnailFile = $this->assetsDir.$thumbPath;
+		$originalFile = $this->assetsDir."/".$this->namespace.$this->originalPrefix."/".$image;
+
+		if(!file_exists($thumbnailFile)) {
+			$this->mkdir(dirname($thumbnailFile));
+			if(file_exists($originalFile)) {
+				$img = Nette\Image::fromFile($originalFile);
+				$img->resize($width, $height, $flags);
+				$img->save($thumbnailFile);
+			}
+		}
+		$this->namespace = null;
+		return $this->getPath().$thumbPath;
+	}
+
+	/**
+	 * @param string $dir
+	 *
+	 * @throws \Nette\IOException
+	 * @return void
+	 */
+	private static function mkdir($dir)
+	{
+		$oldMask = umask(0);
+		@mkdir($dir, 0777, true);
+		@chmod($dir, 0777);
+		umask($oldMask);
+
+		if (!is_dir($dir) || !is_writable($dir)) {
+			throw new Nette\IOException("Please create writable directory $dir.");
+		}
+	}
+
+}
