@@ -75,7 +75,7 @@ class ImagePipe extends Nette\Object {
 	public function request($image, $size = null, $flags = null) {
 		$this->checkSettings();
 		if($size === null)
-			return $this->getPath().$this->namespace.$this->originalPrefix."/".$image;
+			return $this->getPath()."/".$this->namespace.$this->originalPrefix."/".$image;
 
 		list($width, $height) = explode("x", $size);
 		if( $flags == null ) {
