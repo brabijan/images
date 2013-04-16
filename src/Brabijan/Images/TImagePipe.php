@@ -11,7 +11,7 @@ use Nette;
 trait TImagePipe {
 
 	/** @var ImagePipe */
-	protected $imgPipe;
+	public $imgPipe;
 
 	/**
 	 * @param ImagePipe $imgPipe
