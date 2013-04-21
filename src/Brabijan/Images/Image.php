@@ -10,7 +10,8 @@ use Nette;
  * @property-read string $file
  * @property-read Size $size
  */
-class Image extends Nette\Object {
+class Image extends Nette\Object
+{
 
 	/** @var string */
 	private $file;
@@ -19,35 +20,43 @@ class Image extends Nette\Object {
 	private $size;
 
 
+
 	/**
 	 * @param string $file
 	 */
-	public function __construct($file) {
+	public function __construct($file)
+	{
 		$this->file = $file;
 		$this->size = Size::fromFile($file);
 	}
 
 
+
 	/**
 	 * @return bool
 	 */
-	public function exists() {
+	public function exists()
+	{
 		return file_exists($this->file);
 	}
+
 
 
 	/**
 	 * @return float|int
 	 */
-	public function getFile() {
+	public function getFile()
+	{
 		return $this->file;
 	}
+
 
 
 	/**
 	 * @return Size
 	 */
-	public function getSize() {
+	public function getSize()
+	{
 		return $this->size;
 	}
 

@@ -11,21 +11,24 @@ use Nette\Utils\Strings;
 /**
  * @author Filip Procházka <filip.prochazka@kdyby.org>
  */
-class ImageStorage extends Nette\Object {
+class ImageStorage extends Nette\Object
+{
 
 	/** @var string */
 	private $imagesDir;
 
 	/** @var string */
-	private $namespace = null;
+	private $namespace = NULL;
 
 	private $originalPrefix = "original";
+
 
 
 	/**
 	 * @param string $dir
 	 */
-	public function __construct($dir) {
+	public function __construct($dir)
+	{
 		if (!is_dir($dir)) {
 			umask(0);
 			mkdir($dir, 0777);
@@ -33,35 +36,46 @@ class ImageStorage extends Nette\Object {
 		$this->imagesDir = $dir;
 	}
 
-	public function setOriginalPrefix($originalPrefix) {
+
+
+	public function setOriginalPrefix($originalPrefix)
+	{
 		$this->originalPrefix = $originalPrefix;
 	}
 
 
-	public function setNamespace($namespace) {
-		if($namespace === null) {
-			$this->namespace = null;
-		}
-		else {
+
+	public function setNamespace($namespace)
+	{
+		if ($namespace === NULL) {
+			$this->namespace = NULL;
+		} else {
 			$this->namespace = $namespace . DIRECTORY_SEPARATOR;
 		}
+
 		return $this;
 	}
 
-	public function setImagesDir($dir) {
+
+
+	public function setImagesDir($dir)
+	{
 		if (!is_dir($dir)) {
 			umask(0);
 			mkdir($dir, 0777);
 		}
 		$this->imagesDir = $dir;
 	}
+
+
 
 	/**
 	 * @param FileUpload $file
 	 * @return Image
 	 * @throws \Nette\InvalidArgumentException
 	 */
-	public function upload(FileUpload $file) {
+	public function upload(FileUpload $file)
+	{
 		if (!$file->isOk() || !$file->isImage()) {
 			throw new Nette\InvalidArgumentException;
 		}
@@ -71,9 +85,11 @@ class ImageStorage extends Nette\Object {
 		} while (file_exists($path = $this->imagesDir . DIRECTORY_SEPARATOR . $this->namespace . $this->originalPrefix . DIRECTORY_SEPARATOR . $name));
 
 		$file->move($path);
-		$this->namespace = null;
+		$this->namespace = NULL;
+
 		return new Image($path);
 	}
+
 
 
 	/**
@@ -81,22 +97,27 @@ class ImageStorage extends Nette\Object {
 	 * @param string $filename
 	 * @return Image
 	 */
-	public function save($content, $filename) {
+	public function save($content, $filename)
+	{
 		do {
 			$name = Strings::random(10) . '.' . $filename;
 		} while (file_exists($path = $this->imagesDir . DIRECTORY_SEPARATOR . $name));
 
 		file_put_contents($path, $content);
+
 		return new Image($path);
 	}
+
 
 
 	/**
 	 * @return string
 	 */
-	public function getImagesDir() {
+	public function getImagesDir()
+	{
 		return $this->imagesDir;
 	}
+
 
 
 	/**
@@ -104,7 +125,8 @@ class ImageStorage extends Nette\Object {
 	 * @throws FileNotFoundException
 	 * @return string
 	 */
-	public function find($param) {
+	public function find($param)
+	{
 		foreach (Finder::findFiles($param)->from($this->imagesDir) as $file) {
 			/** @var \SplFileInfo $file */
 			return $file->getPathname();
@@ -116,9 +138,11 @@ class ImageStorage extends Nette\Object {
 }
 
 
+
 /**
  * @author Filip Procházka <filip.prochazka@kdyby.org>
  */
-class FileNotFoundException extends \RuntimeException {
+class FileNotFoundException extends \RuntimeException
+{
 
 }
