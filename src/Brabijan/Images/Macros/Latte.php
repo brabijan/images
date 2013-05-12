@@ -1,6 +1,6 @@
 <?php
 
-namespace Brabijan\Images\Latte;
+namespace Brabijan\Images\Macros;
 
 use Nette,
 	Nette\Latte\PhpWriter,
@@ -12,7 +12,7 @@ use Nette,
  * @author Jan Brabec <brabijan@gmail.com>
  * @author Filip Procházka <filip@prochazka.su>
  */
-class ImagesMacro extends Nette\Latte\Macros\MacroSet
+class Latte extends Nette\Latte\Macros\MacroSet
 {
 
 	/**
@@ -51,20 +51,15 @@ class ImagesMacro extends Nette\Latte\Macros\MacroSet
 	public function macroImg(MacroNode $node, PhpWriter $writer)
 	{
 		$this->isUsed = TRUE;
-		$arguments = explode(",", $node->args);
-		if (!isset($arguments[0])) {
+		$arguments = Helpers::prepareMacroArguments($node->args);
+		if ($arguments["name"] === NULL) {
 			throw new Nette\Latte\CompileException("Please provide filename.");
 		}
-		if (count($arguments) > 3) {
-			throw new Nette\Latte\CompileException("");
-		}
-		$namespace = NULL;
-		$namespace = explode("/", $arguments[0]);
-		if (count($namespace) == 2) {
-			list($namespace, $arguments[0]) = $namespace;
-		}
+
+		$namespace = $arguments["namespace"];
+		unset($arguments["namespace"]);
 		$arguments = array_map(function ($value) use ($writer) {
-			return $writer->formatWord(trim($value));
+			return $writer->formatWord($value);
 		}, $arguments);
 
 		return $writer->write('echo %escape($_imagePipe->setNamespace(' . $writer->formatWord(trim($namespace)) . ')->request(' . implode(", ", $arguments) . '))');
@@ -81,20 +76,15 @@ class ImagesMacro extends Nette\Latte\Macros\MacroSet
 	public function macroAttrImg(MacroNode $node, PhpWriter $writer)
 	{
 		$this->isUsed = TRUE;
-		$arguments = explode(",", $node->args);
-		if (!isset($arguments[0])) {
+		$arguments = Helpers::prepareMacroArguments($node->args);
+		if ($arguments["name"] === NULL) {
 			throw new Nette\Latte\CompileException("Please provide filename.");
 		}
-		if (count($arguments) > 3) {
-			throw new Nette\Latte\CompileException("");
-		}
-		$namespace = NULL;
-		$namespace = explode("/", $arguments[0]);
-		if (count($namespace) == 2) {
-			list($namespace, $arguments[0]) = $namespace;
-		}
+
+		$namespace = $arguments["namespace"];
+		unset($arguments["namespace"]);
 		$arguments = array_map(function ($value) use ($writer) {
-			return $writer->formatWord(trim($value));
+			return $writer->formatWord($value);
 		}, $arguments);
 
 		return $writer->write('?>src="<?php echo %escape($_imagePipe->setNamespace(' . $writer->formatWord(trim($namespace)) . ')->request(' . implode(", ", $arguments) . '))?>" <?php');
