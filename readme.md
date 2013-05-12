@@ -41,7 +41,7 @@ $imageStorage->upload($fileUpload); // saves to .../assetsDir/original/filename.
 $imageStorage->setNamespace("products")->upload($fileUpload); // saves to .../assetsDir/products/original/filename.jpg
 ```
 
-### Using in Latte
+### Using in Latte
 
 ```html
 <a href="{img products/filename.jpg}"><img n:img="filename.jpg, 200x200, fill"></a>
@@ -53,7 +53,7 @@ output:
 <a href="/assetsDir/products/original/filename.jpg"><img n:img="/assetsDir/200x200_fill/filename.jpg"></a>
 ```
 
-### Using in [Texy!](http://texy.info/)
+### Using in [Texy!](http://texy.info/)
 
 First you have to register macro into Texy!
 
@@ -70,6 +70,6 @@ Now you can just use it. Macro expands native image macro in Texy. Here is the s
 
 If file not found in image storage, macro try to search file in document root. Of course you can add title or floating of image, as you know from pure Texy!
 
-### Resizing flags
+### Resizing flags
 
 For resizing (third argument) you can use these keywords - `fit`, `fill`, `exact`, `stretch`, `shrink_only`. For details see comments above [these constants](http://api.nette.org/2.0/source-common.Image.php.html#105)
