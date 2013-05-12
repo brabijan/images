@@ -30,6 +30,11 @@ class ImagePipe extends Nette\Object
 
 
 
+	/**
+	 * @param $assetsDir
+	 * @param $wwwDir
+	 * @param Nette\Http\Request $httpRequest
+	 */
 	public function __construct($assetsDir, $wwwDir, Nette\Http\Request $httpRequest)
 	{
 		$this->wwwDir = $wwwDir;
@@ -39,6 +44,9 @@ class ImagePipe extends Nette\Object
 
 
 
+	/**
+	 * @param $path
+	 */
 	public function setPath($path)
 	{
 		$this->path = $path;
@@ -46,6 +54,9 @@ class ImagePipe extends Nette\Object
 
 
 
+	/**
+	 * @param $dir
+	 */
 	public function setAssetsDir($dir)
 	{
 		$this->assetsDir = $dir;
@@ -53,6 +64,9 @@ class ImagePipe extends Nette\Object
 
 
 
+	/**
+	 * @return string
+	 */
 	public function getAssetsDir()
 	{
 		return $this->assetsDir;
@@ -60,6 +74,9 @@ class ImagePipe extends Nette\Object
 
 
 
+	/**
+	 * @return string
+	 */
 	public function getPath()
 	{
 		return $this->path !== NULL ? $this->path : $this->baseUrl . str_replace($this->wwwDir, '', $this->assetsDir);
@@ -67,6 +84,9 @@ class ImagePipe extends Nette\Object
 
 
 
+	/**
+	 * @param $originalPrefix
+	 */
 	public function setOriginalPrefix($originalPrefix)
 	{
 		$this->originalPrefix = $originalPrefix;
@@ -74,6 +94,9 @@ class ImagePipe extends Nette\Object
 
 
 
+	/**
+	 * @throws \Nette\InvalidStateException
+	 */
 	private function checkSettings()
 	{
 		if ($this->assetsDir == NULL) {
@@ -89,6 +112,10 @@ class ImagePipe extends Nette\Object
 
 
 
+	/**
+	 * @param $namespace
+	 * @return $this
+	 */
 	public function setNamespace($namespace)
 	{
 		if (empty($namespace)) {
@@ -102,6 +129,13 @@ class ImagePipe extends Nette\Object
 
 
 
+	/**
+	 * @param $image
+	 * @param null $size
+	 * @param null $flags
+	 * @return string
+	 * @throws \Nette\Latte\CompileException
+	 */
 	public function request($image, $size = NULL, $flags = NULL)
 	{
 		$this->checkSettings();

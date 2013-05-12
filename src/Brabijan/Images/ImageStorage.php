@@ -38,6 +38,9 @@ class ImageStorage extends Nette\Object
 
 
 
+	/**
+	 * @param $originalPrefix
+	 */
 	public function setOriginalPrefix($originalPrefix)
 	{
 		$this->originalPrefix = $originalPrefix;
@@ -45,6 +48,10 @@ class ImageStorage extends Nette\Object
 
 
 
+	/**
+	 * @param $namespace
+	 * @return $this
+	 */
 	public function setNamespace($namespace)
 	{
 		if ($namespace === NULL) {
@@ -58,6 +65,9 @@ class ImageStorage extends Nette\Object
 
 
 
+	/**
+	 * @param $dir
+	 */
 	public function setImagesDir($dir)
 	{
 		if (!is_dir($dir)) {
