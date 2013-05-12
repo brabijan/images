@@ -40,4 +40,8 @@ trait TImagePipe
 		return $template;
 	}
 
+	protected function registerTexyMacros(\Texy $texy) {
+		Macros\Texy::register($texy, $this->imgPipe);
+	}
+
 }
