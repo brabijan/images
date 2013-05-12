@@ -62,17 +62,13 @@ $texy = new Texy;
 $this->registerTexyMacros($texy);
 ```
 
-Now you can just use it.
+Now you can just use it. Macro expands native image macro in Texy. Here is the syntax.
 
 ```html
-[img products/filename.jpg, 200x200, fill]
+[* products/filename.jpg, 200x200, fill *]
 ```
 
-output
-
-```html
-<img src="/assetsDir/products/200x200_fill/filename.jpg">
-```
+If file not found in image storage, macro try to search file in document root. Of course you can add title or floating of image, as you know from pure Texy!
 
 ### Resizing flags
 
