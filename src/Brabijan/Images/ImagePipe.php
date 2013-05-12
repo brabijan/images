@@ -136,8 +136,9 @@ class ImagePipe extends Nette\Object
 	 * @param bool $strictMode
 	 * @return string
 	 * @throws \Nette\Latte\CompileException
+	 * @throws FileNotFoundException;
 	 */
-	public function request($image, $size = NULL, $flags = NULL)
+	public function request($image, $size = NULL, $flags = NULL, $strictMode = FALSE)
 	{
 		$this->checkSettings();
 		if (empty($image)) {
@@ -183,6 +184,8 @@ class ImagePipe extends Nette\Object
 				$img = Nette\Image::fromFile($originalFile);
 				$img->resize($width, $height, $flags);
 				$img->save($thumbnailFile);
+			} elseif ($strictMode) {
+				throw new FileNotFoundException;
 			}
 		}
 		$this->namespace = NULL;
