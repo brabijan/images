@@ -2,11 +2,11 @@
 
 namespace Brabijan\Images\Macros;
 
-use Nette,
-	Nette\Latte\PhpWriter,
-	Nette\Latte\MacroNode,
-	Nette\Latte\Compiler,
-	Brabijan\Images\ImagePipe;
+use Brabijan\Images\ImagePipe;
+use Nette;
+use Nette\Latte\Compiler;
+use Nette\Latte\MacroNode;
+use Nette\Latte\PhpWriter;
 
 /**
  * @author Jan Brabec <brabijan@gmail.com>

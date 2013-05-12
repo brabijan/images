@@ -1,7 +1,6 @@
 <?php
 
 namespace Brabijan\Images;
-
 use Nette;
 use Nette\Http\FileUpload;
 use Nette\Utils\Finder;

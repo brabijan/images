@@ -8,7 +8,8 @@ use Nette;
 class Texy extends Nette\Object
 {
 
-	public static function register(\Texy $texy, ImagePipe $imagePipe) {
+	public static function register(\Texy $texy, ImagePipe $imagePipe)
+	{
 		$texy->allowed["brabijan/images"] = TRUE;
 		$texy->registerBlockPattern(function ($parser, $matches, $name) use ($imagePipe) {
 			$arguments = rtrim(ltrim($matches[0], '[img '), ']');

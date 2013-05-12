@@ -2,9 +2,9 @@
 
 namespace Brabijan\Images\DI;
 
-use Nette,
-	Nette\Config\Compiler,
-	Nette\Config\Configurator;
+use Nette;
+use Nette\Config\Compiler;
+use Nette\Config\Configurator;
 
 /**
  * @author Jan Brabec <brabijan@gmail.com>

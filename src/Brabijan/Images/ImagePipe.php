@@ -139,12 +139,12 @@ class ImagePipe extends Nette\Object
 	public function request($image, $size = NULL, $flags = NULL)
 	{
 		$this->checkSettings();
-		if (empty($image))
-				{
-					return "#";
-				}
-		if ($size === NULL)
+		if (empty($image)) {
+			return "#";
+		}
+		if ($size === NULL) {
 			return $this->getPath() . "/" . $this->namespace . $this->originalPrefix . "/" . $image;
+		}
 
 		list($width, $height) = explode("x", $size);
 		if ($flags == NULL) {
@@ -168,7 +168,9 @@ class ImagePipe extends Nette\Object
 					break;
 			endswitch;
 			if (!isset($flags))
-				throw new Nette\Latte\CompileException('Mode is not allowed');
+					{
+						throw new Nette\Latte\CompileException('Mode is not allowed');
+					}
 		}
 
 		$thumbPath = "/" . $this->namespace . $flags . "_" . $width . "x" . $height . "/" . $image;
