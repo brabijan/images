@@ -130,9 +130,10 @@ class ImagePipe extends Nette\Object
 
 
 	/**
-	 * @param $image
+	 * @param string $image
 	 * @param null $size
 	 * @param null $flags
+	 * @param bool $strictMode
 	 * @return string
 	 * @throws \Nette\Latte\CompileException
 	 */
@@ -167,10 +168,9 @@ class ImagePipe extends Nette\Object
 					$flags = Nette\Image::STRETCH;
 					break;
 			endswitch;
-			if (!isset($flags))
-					{
-						throw new Nette\Latte\CompileException('Mode is not allowed');
-					}
+			if (!isset($flags)) {
+				throw new Nette\Latte\CompileException('Mode is not allowed');
+			}
 		}
 
 		$thumbPath = "/" . $this->namespace . $flags . "_" . $width . "x" . $height . "/" . $image;
