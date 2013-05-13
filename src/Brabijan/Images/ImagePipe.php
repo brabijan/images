@@ -95,6 +95,16 @@ class ImagePipe extends Nette\Object
 
 
 	/**
+	 * @return string
+	 */
+	public function getOriginalPrefix()
+	{
+		return $this->originalPrefix;
+	}
+
+
+
+	/**
 	 * @throws \Nette\InvalidStateException
 	 */
 	private function checkSettings()
