@@ -25,6 +25,7 @@ class ImagesExtension extends Nette\Config\CompilerExtension
 			$this->containerBuilder->parameters["wwwDir"]))
 			->addSetup("setAssetsDir", array($config["assetsDir"]));
 		$builder->addDefinition($this->prefix('imageStorage'))->setClass('Brabijan\Images\ImageStorage', array($config["assetsDir"]));
+		$builder->addDefinition($this->prefix('fileBrowser'))->setClass('Brabijan\Images\FileBrowser');
 	}
 
 

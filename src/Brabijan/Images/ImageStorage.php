@@ -127,23 +127,6 @@ class ImageStorage extends Nette\Object
 		return $this->imagesDir;
 	}
 
-
-
-	/**
-	 * @param $param
-	 * @throws FileNotFoundException
-	 * @return string
-	 */
-	public function find($param)
-	{
-		foreach (Finder::findFiles($param)->from($this->imagesDir) as $file) {
-			/** @var \SplFileInfo $file */
-			return $file->getPathname();
-		}
-
-		throw new FileNotFoundException("File $param not found.");
-	}
-
 }
 
 
