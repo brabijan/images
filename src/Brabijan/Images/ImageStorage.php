@@ -120,6 +120,20 @@ class ImageStorage extends Nette\Object
 
 
 	/**
+	 *
+	 */
+	public function deleteFile($filename)
+	{
+		/** @var $file \SplFileInfo */
+		foreach (Finder::findFiles($filename)->from($this->imagesDir . ($this->namespace ? DIRECTORY_SEPARATOR . $this->namespace : "")) as $file) {
+			@unlink($file->getPathname());
+		}
+		$this->namespace = NULL;
+	}
+
+
+
+	/**
 	 * @return string
 	 */
 	public function getImagesDir()
