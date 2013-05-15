@@ -65,6 +65,16 @@ class ImageStorage extends Nette\Object
 
 
 	/**
+	 * @param string $namespace
+	 * @return bool
+	 */
+	public function isNamespaceExists($namespace) {
+		return file_exists($this->imagesDir . DIRECTORY_SEPARATOR . $namespace);
+	}
+
+
+
+	/**
 	 * @param $dir
 	 */
 	public function setImagesDir($dir)
