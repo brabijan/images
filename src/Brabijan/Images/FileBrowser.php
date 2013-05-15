@@ -58,7 +58,7 @@ class FileBrowser extends Nette\Object
 	/**
 	 * Returns all declared namespaces
 	 *
-	 * @return \SplFileInfo[]
+	 * @return array
 	 */
 	public function getDeclaredNamespaces()
 	{
