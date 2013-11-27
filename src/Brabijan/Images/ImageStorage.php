@@ -56,7 +56,7 @@ class ImageStorage extends Nette\Object
 		if ($namespace === NULL) {
 			$this->namespace = NULL;
 		} else {
-			$this->namespace = $namespace . DIRECTORY_SEPARATOR;
+			$this->namespace = $namespace . "/";
 		}
 
 		return $this;
@@ -69,7 +69,7 @@ class ImageStorage extends Nette\Object
 	 * @return bool
 	 */
 	public function isNamespaceExists($namespace) {
-		return file_exists($this->imagesDir . DIRECTORY_SEPARATOR . $namespace);
+		return file_exists($this->imagesDir . "/" . $namespace);
 	}
 
 
@@ -101,7 +101,7 @@ class ImageStorage extends Nette\Object
 
 		do {
 			$name = Strings::random(10) . '.' . $file->getSanitizedName();
-		} while (file_exists($path = $this->imagesDir . DIRECTORY_SEPARATOR . $this->namespace . $this->originalPrefix . DIRECTORY_SEPARATOR . $name));
+		} while (file_exists($path = $this->imagesDir . "/" . $this->namespace . $this->originalPrefix . "/" . $name));
 
 		$file->move($path);
 		$this->namespace = NULL;
@@ -120,7 +120,7 @@ class ImageStorage extends Nette\Object
 	{
 		do {
 			$name = Strings::random(10) . '.' . $filename;
-		} while (file_exists($path = $this->imagesDir . DIRECTORY_SEPARATOR . $name));
+		} while (file_exists($path = $this->imagesDir . "/" . $name));
 
 		file_put_contents($path, $content);
 
@@ -135,7 +135,7 @@ class ImageStorage extends Nette\Object
 	public function deleteFile($filename)
 	{
 		/** @var $file \SplFileInfo */
-		foreach (Finder::findFiles($filename)->from($this->imagesDir . ($this->namespace ? DIRECTORY_SEPARATOR . $this->namespace : "")) as $file) {
+		foreach (Finder::findFiles($filename)->from($this->imagesDir . ($this->namespace ? "/" . $this->namespace : "")) as $file) {
 			@unlink($file->getPathname());
 		}
 		$this->namespace = NULL;

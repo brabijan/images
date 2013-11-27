@@ -131,7 +131,7 @@ class ImagePipe extends Nette\Object
 		if (empty($namespace)) {
 			$this->namespace = NULL;
 		} else {
-			$this->namespace = $namespace . DIRECTORY_SEPARATOR;
+			$this->namespace = $namespace . "/";
 		}
 
 		return $this;
