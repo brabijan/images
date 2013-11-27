@@ -44,7 +44,7 @@ class FileBrowser extends Nette\Object
 	public function getNamespaceFiles($namespace = NULL)
 	{
 		$files = array();
-		$imageDir = $this->assetsDir . ($namespace ? DIRECTORY_SEPARATOR . $namespace : "") . DIRECTORY_SEPARATOR . $this->originalPrefix;
+		$imageDir = $this->assetsDir . ($namespace ? "/" . $namespace : "") . "/" . $this->originalPrefix;
 		/** @var $file \SplFileInfo */
 		foreach (Finder::findFiles("*")->in($this->assetsDir, $imageDir) as $file) {
 			$files[] = $file;
