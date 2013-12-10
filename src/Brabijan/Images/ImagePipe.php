@@ -200,7 +200,11 @@ class ImagePipe extends Nette\Object
 			$this->mkdir(dirname($thumbnailFile));
 			if (file_exists($originalFile)) {
 				$img = Nette\Image::fromFile($originalFile);
-				$img->resize($width, $height, $flags);
+				if ($flags == "crop") {
+					$img->crop('50%', '50%', $width, $height);
+				} else {
+					$img->resize($width, $height, $flags);
+				}
 				$img->save($thumbnailFile);
 			} elseif ($strictMode) {
 				throw new FileNotFoundException;
