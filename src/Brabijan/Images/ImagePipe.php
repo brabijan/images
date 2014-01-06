@@ -110,10 +110,13 @@ class ImagePipe extends Nette\Object
 	private function checkSettings()
 	{
 		if ($this->assetsDir == NULL) {
-			throw new Nette\InvalidStateException("Dir is not setted");
+			throw new Nette\InvalidStateException("Assets directory is not setted");
 		}
 		if (!file_exists($this->assetsDir)) {
-			throw new Nette\InvalidStateException("Dir does not exists");
+			throw new Nette\InvalidStateException("Assets directory '{$this->assetsDir}' does not exists");
+		}
+		elseif (!is_writeable($this->assetsDir)) {
+			throw new Nette\InvalidStateException("Make assets directory '{$this->assetsDir}' writeable");
 		}
 		if ($this->getPath() == NULL) {
 			throw new Nette\InvalidStateException("Path is not setted");
