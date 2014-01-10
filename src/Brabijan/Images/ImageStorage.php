@@ -68,7 +68,8 @@ class ImageStorage extends Nette\Object
 	 * @param string $namespace
 	 * @return bool
 	 */
-	public function isNamespaceExists($namespace) {
+	public function isNamespaceExists($namespace)
+	{
 		return file_exists($this->imagesDir . "/" . $namespace);
 	}
 
@@ -130,7 +131,8 @@ class ImageStorage extends Nette\Object
 
 
 	/**
-	 *
+	 * @param $filename
+	 * @throws \Nette\InvalidStateException
 	 */
 	public function deleteFile($filename)
 	{
