@@ -134,6 +134,9 @@ class ImageStorage extends Nette\Object
 	 */
 	public function deleteFile($filename)
 	{
+		if (empty($filename)) {
+			throw new Nette\InvalidStateException('Filename was not provided');
+		}
 		/** @var $file \SplFileInfo */
 		foreach (Finder::findFiles($filename)->from($this->imagesDir . ($this->namespace ? "/" . $this->namespace : "")) as $file) {
 			@unlink($file->getPathname());
