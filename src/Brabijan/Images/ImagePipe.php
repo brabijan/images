@@ -154,7 +154,10 @@ class ImagePipe extends Nette\Object
 	public function request($image, $size = NULL, $flags = NULL, $strictMode = FALSE)
 	{
 		$this->checkSettings();
-		if (empty($image)) {
+		if ($image instanceof ImageProvider) {
+			$this->setNamespace($image->getNamespace());
+			$image = $image->getFilename();
+		} elseif (empty($image)) {
 			return "#";
 		}
 		if ($size === NULL) {
