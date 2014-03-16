@@ -59,10 +59,14 @@ class Latte extends Nette\Latte\Macros\MacroSet
 		$namespace = $arguments["namespace"];
 		unset($arguments["namespace"]);
 		$arguments = array_map(function ($value) use ($writer) {
-			return $writer->formatWord($value);
+			return $value ? $writer->formatWord($value) : 'NULL';
 		}, $arguments);
 
-		return $writer->write('echo %escape($_imagePipe->setNamespace(' . $writer->formatWord(trim($namespace)) . ')->request(' . implode(", ", $arguments) . '))');
+		$command = '$_imagePipe';
+		$command .= $namespace !== NULL ? '->setNamespace(' . $writer->formatWord(trim($namespace)) . ')' : '';
+		$command .= '->request(' . implode(", ", $arguments) . ')';
+
+		return $writer->write('echo %escape(' . $writer->formatWord($command) . ')');
 	}
 
 
@@ -84,10 +88,14 @@ class Latte extends Nette\Latte\Macros\MacroSet
 		$namespace = $arguments["namespace"];
 		unset($arguments["namespace"]);
 		$arguments = array_map(function ($value) use ($writer) {
-			return $writer->formatWord($value);
+			return $value ? $writer->formatWord($value) : 'NULL';
 		}, $arguments);
 
-		return $writer->write('?>src="<?php echo %escape($_imagePipe->setNamespace(' . $writer->formatWord(trim($namespace)) . ')->request(' . implode(", ", $arguments) . '))?>" <?php');
+		$command = '$_imagePipe';
+		$command .= $namespace !== NULL ? '->setNamespace(' . $writer->formatWord(trim($namespace)) . ')' : '';
+		$command .= '->request(' . implode(", ", $arguments) . ')';
+
+		return $writer->write('?> src="<?php echo %escape(' . $writer->formatWord($command) . ')?>" <?php');
 	}
 
 
@@ -134,7 +142,7 @@ class Latte extends Nette\Latte\Macros\MacroSet
 
 			throw new Nette\InvalidStateException(
 				'Please provide an instanceof Img\\ImagePipe ' .
-					'as a parameter $_imagePipe to template' . $where
+				'as a parameter $_imagePipe to template' . $where
 			);
 		}
 	}

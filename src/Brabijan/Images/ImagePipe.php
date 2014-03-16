@@ -153,14 +153,6 @@ class ImagePipe extends Nette\Object
 	 */
 	public function request($image, $size = NULL, $flags = NULL, $strictMode = FALSE)
 	{
-		if (empty($size)) {
-			$size = NULL;
-		}
-
-		if (empty($flags)) {
-			$flags = NULL;
-		}
-
 		$this->checkSettings();
 		if (empty($image)) {
 			return "#";
