@@ -3,13 +3,20 @@
 namespace Brabijan\Images\DI;
 
 use Nette;
-use Nette\Config\Compiler;
-use Nette\Config\Configurator;
+use Nette\DI\Compiler;
+use Nette\DI\Configurator;
+
+
+if (!class_exists('Nette\DI\CompilerExtension')) {
+	class_alias('Nette\Config\CompilerExtension', 'Nette\DI\CompilerExtension');
+	class_alias('Nette\Config\Compiler', 'Nette\DI\Compiler');
+	class_alias('Nette\Config\Configurator', 'Nette\DI\Configurator');
+}
 
 /**
  * @author Jan Brabec <brabijan@gmail.com>
  */
-class ImagesExtension extends Nette\Config\CompilerExtension
+class ImagesExtension extends Nette\DI\CompilerExtension
 {
 
 	public function loadConfiguration()
