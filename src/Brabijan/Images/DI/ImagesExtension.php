@@ -26,7 +26,7 @@ class ImagesExtension extends Nette\DI\CompilerExtension
 		$engine = $builder->getDefinition('nette.latte');
 
 		$install = 'Brabijan\Images\Macros\Latte::install';
-		$engine->addSetup($install . '(?->compiler)', array('@self'));
+		$engine->addSetup($install . '(?->getCompiler())', array('@self'));
 
 		$builder->addDefinition($this->prefix('imagePipe'))->setClass('Brabijan\Images\ImagePipe', array($config["assetsDir"],
 			$this->containerBuilder->parameters["wwwDir"]))
