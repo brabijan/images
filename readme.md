@@ -11,10 +11,11 @@ The best way to install brabijan/images is using  [Composer](http://getcomposer.
 $ composer require brabijan/images:@dev
 ```
 
-After that you have to register extension in your bootstrap.php.
+Then you have to register extension in `config.neon`.
 
-```php
-Brabijan\Images\DI\ImagesExtension::register($configurator);
+```yaml
+extensions:
+	- Brabijan\Images\DI\ImagesExtension
 ```
 
 Package contains trait, which you will have to use in class, where you want to use image storage. This works only for PHP 5.4+, for older version you can simply copy trait content and paste it into class where you want to use it.
