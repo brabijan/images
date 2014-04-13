@@ -46,6 +46,7 @@ class ImagesExtension extends Nette\DI\CompilerExtension
 	}
 
 
+
 	/**
 	 * {@inheritdoc}
 	 */
