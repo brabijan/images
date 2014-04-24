@@ -111,8 +111,6 @@ class UploadControl extends Nette\Forms\Controls\BaseControl
 
 
 
-	/**
-	 */
 	public function loadHttpData()
 	{
 		parent::loadHttpData();
