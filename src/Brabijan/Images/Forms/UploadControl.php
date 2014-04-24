@@ -59,8 +59,8 @@ class UploadControl extends Nette\Forms\Controls\BaseControl
 
 		} elseif ($parent instanceof Nette\Application\UI\Presenter) {
 			if (!$this->httpRequest) {
-				$this->httpRequest = $parent->getContext()->httpRequest;
-				$this->httpResponse = $parent->getContext()->httpResponse;
+				$this->httpRequest = $parent->getContext()->getService('httpRequest');
+				$this->httpResponse = $parent->getContext()->getService('httpResponse');
 			}
 		}
 
