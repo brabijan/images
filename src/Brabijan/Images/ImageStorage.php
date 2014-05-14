@@ -21,6 +21,9 @@ class ImageStorage extends Nette\Object
 
 	private $originalPrefix = "original";
 
+	/** @var array */
+	public $onUploadImage = array();
+
 
 
 	/**
@@ -105,6 +108,7 @@ class ImageStorage extends Nette\Object
 		} while (file_exists($path = $this->imagesDir . "/" . $this->namespace . $this->originalPrefix . "/" . $name));
 
 		$file->move($path);
+		$this->onUploadImage($path, $this->namespace);
 		$this->namespace = NULL;
 
 		return new Image($path);

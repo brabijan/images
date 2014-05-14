@@ -28,6 +28,9 @@ class ImagePipe extends Nette\Object
 	/** @var string|null */
 	private $namespace = NULL;
 
+	/** @var array */
+	public $onBeforeSaveThumbnail = array();
+
 
 
 	/**
@@ -203,6 +206,8 @@ class ImagePipe extends Nette\Object
 				} else {
 					$img->resize($width, $height, $flags);
 				}
+
+				$this->onBeforeSaveThumbnail($img, $this->namespace, $image, $width, $height, $flags);
 				$img->save($thumbnailFile);
 			} elseif ($strictMode) {
 				throw new FileNotFoundException;
