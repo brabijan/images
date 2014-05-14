@@ -38,7 +38,6 @@ class Latte extends Nette\Latte\Macros\MacroSet
 	public static function install(Compiler $compiler)
 	{
 		$me = new static($compiler);
-		// todo: předání parametrů s velikostí
 
 		/**
 		 * {img [namespace/]$name[, $size[, $flags]]}
