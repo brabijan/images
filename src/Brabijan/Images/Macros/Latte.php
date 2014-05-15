@@ -3,18 +3,10 @@
 namespace Brabijan\Images\Macros;
 
 use Brabijan\Images\ImagePipe;
-use Latte\Compiler;
-use Latte\MacroNode;
-use Latte\PhpWriter;
 use Nette;
-
-
-if (!class_exists('Latte\Compiler')) {
-	class_alias('Nette\Latte\Compiler', 'Latte\Compiler');
-	class_alias('Nette\Latte\MacroNode', 'Latte\MacroNode');
-	class_alias('Nette\Latte\PhpWriter', 'Latte\PhpWriter');
-}
-
+use Nette\Latte\Compiler;
+use Nette\Latte\MacroNode;
+use Nette\Latte\PhpWriter;
 
 /**
  * @author Jan Brabec <brabijan@gmail.com>
