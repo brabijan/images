@@ -16,6 +16,7 @@ if (!class_exists('Nette\DI\CompilerExtension')) {
 
 if (!class_exists('Latte\Engine')) {
 	class_alias('Nette\Latte\Engine', 'Latte\Engine');
+	class_alias('Nette\Templating\Template', 'Latte\Template');
 }
 
 /**
