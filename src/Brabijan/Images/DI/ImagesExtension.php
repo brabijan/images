@@ -28,12 +28,12 @@ class ImagesExtension extends Nette\DI\CompilerExtension
 	{
 		$config = $this->getConfig();
 		$builder = $this->getContainerBuilder();
-		$engine = $builder->getDefinition('nette.latte');
+		$engine = $builder->getDefinition('nette.latteFactory');
 
 		$install = 'Brabijan\Images\Macros\Latte::install';
 
 		if (method_exists('Latte\Engine', 'getCompiler')) {
-			$engine->addSetup($install . '(?->getCompiler())', array('@self'));
+			$engine->addSetup('Brabijan\Images\Macros\Latte::install(?->getCompiler())', array('@self'));
 		} else {
 			$engine->addSetup($install . '(?->compiler)', array('@self'));
 		}

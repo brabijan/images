@@ -6,21 +6,17 @@ use Brabijan\Images\ImagePipe;
 use Latte\Compiler;
 use Latte\MacroNode;
 use Latte\PhpWriter;
+use Latte\Template;
+use Latte\Macros\MacroSet;
 use Nette;
 
-
-if (!class_exists('Latte\Compiler')) {
-	class_alias('Nette\Latte\Compiler', 'Latte\Compiler');
-	class_alias('Nette\Latte\MacroNode', 'Latte\MacroNode');
-	class_alias('Nette\Latte\PhpWriter', 'Latte\PhpWriter');
-}
 
 
 /**
  * @author Jan Brabec <brabijan@gmail.com>
  * @author Filip Procházka <filip@prochazka.su>
  */
-class Latte extends Nette\Latte\Macros\MacroSet
+class Latte extends MacroSet
 {
 
 	/**
@@ -33,7 +29,7 @@ class Latte extends Nette\Latte\Macros\MacroSet
 	/**
 	 * @param \Nette\Latte\Compiler $compiler
 	 *
-	 * @return ImgMacro|\Nette\Latte\Macros\MacroSet
+	 * @return ImgMacro|MacroSet
 	 */
 	public static function install(Compiler $compiler)
 	{
@@ -139,7 +135,7 @@ class Latte extends Nette\Latte\Macros\MacroSet
 	 * @param \Nette\Templating\Template $template
 	 * @throws \Nette\InvalidStateException
 	 */
-	public static function validateTemplateParams(Nette\Templating\Template $template)
+	public static function validateTemplateParams(Template $template)
 	{
 		$params = $template->getParameters();
 		if (!isset($params['_imagePipe']) || !$params['_imagePipe'] instanceof ImagePipe) {
