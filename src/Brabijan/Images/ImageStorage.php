@@ -125,8 +125,9 @@ class ImageStorage extends Nette\Object
 	{
 		do {
 			$name = Strings::random(10) . '.' . $filename;
-		} while (file_exists($path = $this->imagesDir . "/" . $name));
+		} while (file_exists($path = $this->imagesDir . "/" . $this->namespace . $this->originalPrefix . "/" . $name));
 
+		@mkdir(dirname($path), 0777, TRUE); // @ - dir may already exist
 		file_put_contents($path, $content);
 
 		return new Image($path);
