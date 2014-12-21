@@ -102,10 +102,15 @@ class ImageStorage extends Nette\Object
 		if (!$file->isOk() || !$file->isImage()) {
 			throw new Nette\InvalidArgumentException;
 		}
-
-		do {
-			$name = Strings::random(10) . '.' . $file->getSanitizedName();
-		} while (file_exists($path = $this->imagesDir . "/" . $this->namespace . $this->originalPrefix . "/" . $name));
+		
+		$basePath = $this->imagesDir . "/" . $this->namespace . $this->originalPrefix . "/";
+		$sanitized = $file->getSanitizedName();
+		
+		if (file_exists($path = $basePath . $sanitized)) {
+			do {
+				$name = Strings::random(10) . '.' . $sanitized;
+			} while (file_exists($path = $basePath . $name));
+		}
 
 		$file->move($path);
 		$this->onUploadImage($path, $this->namespace);
@@ -123,13 +128,19 @@ class ImageStorage extends Nette\Object
 	 */
 	public function save($content, $filename)
 	{
-		do {
-			$name = Strings::random(10) . '.' . $filename;
-		} while (file_exists($path = $this->imagesDir . "/" . $this->namespace . $this->originalPrefix . "/" . $name));
+		$basePath = $this->imagesDir . "/" . $this->namespace . $this->originalPrefix . "/";
+		
+		if (file_exists($path = $basePath . $filename)) {
+			do {
+				$name = Strings::random(10) . '.' . $filename;
+			} while (file_exists($path = $basePath . $name));
+		}
 
 		@mkdir(dirname($path), 0777, TRUE); // @ - dir may already exist
 		file_put_contents($path, $content);
-
+		
+		$this->namespace = NULL;
+		
 		return new Image($path);
 	}
 
