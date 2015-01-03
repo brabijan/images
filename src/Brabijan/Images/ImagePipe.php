@@ -169,23 +169,23 @@ class ImagePipe extends Nette\Object
 
 		list($width, $height) = explode("x", $size);
 		if ($flags == NULL) {
-			$flags = Nette\Image::FIT;
+			$flags = Nette\Utils\Image::FIT;
 		} elseif (!is_int($flags)) {
 			switch (strtolower($flags)):
 				case "fit":
-					$flags = Nette\Image::FIT;
+					$flags = Nette\Utils\Image::FIT;
 					break;
 				case "fill":
-					$flags = Nette\Image::FILL;
+					$flags = Nette\Utils\Image::FILL;
 					break;
 				case "exact":
-					$flags = Nette\Image::EXACT;
+					$flags = Nette\Utils\Image::EXACT;
 					break;
 				case "shrink_only":
-					$flags = Nette\Image::SHRINK_ONLY;
+					$flags = Nette\Utils\Image::SHRINK_ONLY;
 					break;
 				case "stretch":
-					$flags = Nette\Image::STRETCH;
+					$flags = Nette\Utils\Image::STRETCH;
 					break;
 			endswitch;
 			if (!isset($flags)) {
@@ -200,7 +200,7 @@ class ImagePipe extends Nette\Object
 		if (!file_exists($thumbnailFile)) {
 			$this->mkdir(dirname($thumbnailFile));
 			if (file_exists($originalFile)) {
-				$img = Nette\Image::fromFile($originalFile);
+				$img = Nette\Utils\Image::fromFile($originalFile);
 				if ($flags == "crop") {
 					$img->crop('50%', '50%', $width, $height);
 				} else {
