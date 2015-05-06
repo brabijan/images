@@ -19,8 +19,7 @@ class Helpers extends Nette\Object
 		$flags = (isset($arguments[2]) AND !empty($arguments[2])) ? $arguments[2] : NULL;
 
 		if (count($ns = explode("/", $name)) >= 2) {
-			$name = array_reverse($ns)[0];
-			array_pop($ns);
+			$name = array_pop($ns);
 			$namespace = implode("/", $ns);
 		}
 
