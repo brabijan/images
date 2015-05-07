@@ -51,7 +51,7 @@ $imageStorage->setNamespace("products")->upload($fileUpload); // saves to .../as
 output:
 
 ```html
-<a href="/assetsDir/products/original/filename.jpg"><img n:img="/assetsDir/200x200_fill/filename.jpg"></a>
+<a href="/assetsDir/products/original/filename.jpg"><img src="/assetsDir/200x200_4/filename.jpg"></a>
 ```
 
 ### Using in [Texy!](http://texy.info/)
