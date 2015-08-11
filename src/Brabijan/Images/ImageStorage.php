@@ -4,7 +4,7 @@ namespace Brabijan\Images;
 use Nette;
 use Nette\Http\FileUpload;
 use Nette\Utils\Finder;
-use Nette\Utils\Strings;
+use Nette\Utils\Random;
 
 
 /**
@@ -104,7 +104,7 @@ class ImageStorage extends Nette\Object
 		}
 
 		do {
-			$name = Strings::random(10) . '.' . $file->getSanitizedName();
+			$name = Random::generate() . '.' . $file->getSanitizedName();
 		} while (file_exists($path = $this->imagesDir . "/" . $this->namespace . $this->originalPrefix . "/" . $name));
 
 		$file->move($path);
@@ -124,7 +124,7 @@ class ImageStorage extends Nette\Object
 	public function save($content, $filename)
 	{
 		do {
-			$name = Strings::random(10) . '.' . $filename;
+			$name = Random::generate() . '.' . $filename;
 		} while (file_exists($path = $this->imagesDir . "/" . $this->namespace . $this->originalPrefix . "/" . $name));
 
 		@mkdir(dirname($path), 0777, TRUE); // @ - dir may already exist
