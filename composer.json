@@ -20,7 +20,8 @@
 		"latte/latte": "~2.2",
         "nette/di": "~2.2",
         "nette/http": "~2.2",
-        "nette/utils": "~2.2"
+        "nette/utils": "~2.2",
+	  	"nette/finder": "~2.2"
 	},
 	"require-dev": {
 		"nette/tester": "@dev"
