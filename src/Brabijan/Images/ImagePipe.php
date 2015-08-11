@@ -113,7 +113,7 @@ class ImagePipe extends Nette\Object
 	private function checkSettings()
 	{
 		if ($this->assetsDir == NULL) {
-			throw new Nette\InvalidStateException("Assets directory is not setted");
+			throw new Nette\InvalidStateException("Assets directory is not set");
 		}
 		if (!file_exists($this->assetsDir)) {
 			throw new Nette\InvalidStateException("Assets directory '{$this->assetsDir}' does not exists");
@@ -122,7 +122,7 @@ class ImagePipe extends Nette\Object
 			throw new Nette\InvalidStateException("Make assets directory '{$this->assetsDir}' writeable");
 		}
 		if ($this->getPath() == NULL) {
-			throw new Nette\InvalidStateException("Path is not setted");
+			throw new Nette\InvalidStateException("Path is not set");
 		}
 	}
 
@@ -171,7 +171,7 @@ class ImagePipe extends Nette\Object
 		if ($flags == NULL) {
 			$flags = Nette\Image::FIT;
 		} elseif (!is_int($flags)) {
-			switch (strtolower($flags)):
+			switch (strtolower($flags)) {
 				case "fit":
 					$flags = Nette\Image::FIT;
 					break;
@@ -187,9 +187,6 @@ class ImagePipe extends Nette\Object
 				case "stretch":
 					$flags = Nette\Image::STRETCH;
 					break;
-			endswitch;
-			if (!isset($flags)) {
-				throw new Nette\Latte\CompileException('Mode is not allowed');
 			}
 		}
 
