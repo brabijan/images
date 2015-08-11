@@ -3,6 +3,7 @@
 namespace Brabijan\Images;
 
 use Nette;
+use Nette\Utils\Image as NImage;
 
 /**
  * @author Jan Brabec <brabijan@gmail.com>
@@ -169,23 +170,23 @@ class ImagePipe extends Nette\Object
 
 		list($width, $height) = explode("x", $size);
 		if ($flags == NULL) {
-			$flags = Nette\Image::FIT;
+			$flags = NImage::FIT;
 		} elseif (!is_int($flags)) {
 			switch (strtolower($flags)):
 				case "fit":
-					$flags = Nette\Image::FIT;
+					$flags = NImage::FIT;
 					break;
 				case "fill":
-					$flags = Nette\Image::FILL;
+					$flags = NImage::FILL;
 					break;
 				case "exact":
-					$flags = Nette\Image::EXACT;
+					$flags = NImage::EXACT;
 					break;
 				case "shrink_only":
-					$flags = Nette\Image::SHRINK_ONLY;
+					$flags = NImage::SHRINK_ONLY;
 					break;
 				case "stretch":
-					$flags = Nette\Image::STRETCH;
+					$flags = NImage::STRETCH;
 					break;
 			endswitch;
 			if (!isset($flags)) {
@@ -200,7 +201,7 @@ class ImagePipe extends Nette\Object
 		if (!file_exists($thumbnailFile)) {
 			$this->mkdir(dirname($thumbnailFile));
 			if (file_exists($originalFile)) {
-				$img = Nette\Image::fromFile($originalFile);
+				$img = NImage::fromFile($originalFile);
 				if ($flags == "crop") {
 					$img->crop('50%', '50%', $width, $height);
 				} else {
