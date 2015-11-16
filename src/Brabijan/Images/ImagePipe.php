@@ -12,7 +12,7 @@ class ImagePipe extends Nette\Object
 {
 
 	/** @var string */
-	private $assetsDir;
+	protected $assetsDir;
 
 	/** @var string */
 	private $wwwDir;
@@ -27,7 +27,7 @@ class ImagePipe extends Nette\Object
 	private $baseUrl;
 
 	/** @var string|null */
-	private $namespace = NULL;
+	protected $namespace = NULL;
 
 	/** @var array */
 	public $onBeforeSaveThumbnail = array();
