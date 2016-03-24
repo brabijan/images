@@ -53,11 +53,31 @@ class Image extends Nette\Object
 
 
 	/**
+	 * @return string
+	 */
+	public function getBasename()
+	{
+		return basename($this->getFile());
+	}
+
+
+
+	/**
 	 * @return Size
 	 */
 	public function getSize()
 	{
 		return $this->size;
+	}
+
+
+
+	/**
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return $this->getBasename();
 	}
 
 }
