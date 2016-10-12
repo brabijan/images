@@ -1,9 +1,9 @@
 {
-	"name": "brabijan/images",
-	"type": "library",
+  	"name": "brabijan/images",
+  	"type": "library",
 	"description": "Image storage for Nette Framework",
 	"keywords": ["nette", "images"],
-	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
+	"license": ["GPL-2.0", "GPL-3.0"],
 	"authors": [
 		{
 			"name": "Jan Brabec"
@@ -24,11 +24,18 @@
 	  	"nette/finder": "~2.2"
 	},
 	"require-dev": {
-		"nette/tester": "@dev"
+		"nette/bootstrap": "~2.2",
+		"tracy/tracy": "~2.2",
+		"phpunit/phpunit": "~4.8"
 	},
 	"autoload": {
 		"psr-0": {
 			"Brabijan\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Brabijan\\Images\\Tests\\": "tests"
 		}
 	}
 }
