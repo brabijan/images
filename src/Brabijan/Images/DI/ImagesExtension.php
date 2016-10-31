@@ -39,7 +39,7 @@ class ImagesExtension extends Nette\DI\CompilerExtension
 		}
 
 		$builder->addDefinition($this->prefix('imagePipe'))
-				->setClass('Brabijan\Images\ImagePipe', array($config['assetsDir'], $this->containerBuilder->parameters['wwwDir']))
+				->setClass('Brabijan\Images\ImagePipe', array($config['assetsDir'], $this->getContainerBuilder()->parameters['wwwDir']))
 				->addSetup('setAssetsDir', array($config['assetsDir']));
 		$builder->addDefinition($this->prefix('imageStorage'))->setClass('Brabijan\Images\ImageStorage', array($config['assetsDir']));
 		$builder->addDefinition($this->prefix('fileBrowser'))->setClass('Brabijan\Images\FileBrowser');
@@ -66,8 +66,8 @@ class ImagesExtension extends Nette\DI\CompilerExtension
 	public function getConfig(array $defaults = NULL, $expand = TRUE)
 	{
 		$defaults = array(
-			'storageDir' => $this->containerBuilder->parameters['wwwDir'] . '/assets',
-			'assetsDir' => $this->containerBuilder->parameters['wwwDir'] . '/assets'
+			'storageDir' => $this->getContainerBuilder()->parameters['wwwDir'] . '/assets',
+			'assetsDir' => $this->getContainerBuilder()->parameters['wwwDir'] . '/assets'
 		);
 
 		return parent::getConfig($defaults, $expand);

@@ -6,7 +6,6 @@ use Brabijan\Images\ImagePipe;
 use Latte\Compiler;
 use Latte\MacroNode;
 use Latte\PhpWriter;
-use Latte\Template;
 use Latte\Macros\MacroSet;
 use Nette;
 
@@ -132,11 +131,15 @@ class Latte extends MacroSet
 
 
 	/**
-	 * @param \Nette\Templating\Template $template
+	 * @param Latte\Runtime\Template|Nette\Application\UI\Template $template
 	 * @throws \Nette\InvalidStateException
 	 */
-	public static function validateTemplateParams(Template $template)
+	public static function validateTemplateParams($template)
 	{
+        if (!($template instanceof \Latte\Runtime\Template) || !($template instanceof \Nette\Application\UI\Template)) {
+            throw new \InvalidArgumentException('$template has to be instance of LR\Template or Nette\Templating\Template, instance of ' . get_class($template) . ' given.');
+        }
+
 		$params = $template->getParameters();
 		if (!isset($params['_imagePipe']) || !$params['_imagePipe'] instanceof ImagePipe) {
 			$where = isset($params['control']) ?
