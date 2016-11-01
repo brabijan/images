@@ -136,7 +136,7 @@ class Latte extends MacroSet
 	 */
 	public static function validateTemplateParams($template)
 	{
-        if (!($template instanceof \Latte\Runtime\Template) || !($template instanceof \Nette\Application\UI\Template)) {
+        if (!($template instanceof \Latte\Runtime\Template) && !($template instanceof \Nette\Application\UI\Template)) {
             throw new \InvalidArgumentException('$template has to be instance of LR\Template or Nette\Templating\Template, instance of ' . get_class($template) . ' given.');
         }
 
