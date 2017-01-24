@@ -48,19 +48,6 @@ class ImagesExtension extends Nette\DI\CompilerExtension
 
 
 	/**
-	 * @param \Nette\Config\Configurator $config
-	 * @param string $extensionName
-	 */
-	public static function register(Configurator $config, $extensionName = 'imagesExtension')
-	{
-		$config->onCompile[] = function (Configurator $config, Compiler $compiler) use ($extensionName) {
-			$compiler->addExtension($extensionName, new ImagesExtension());
-		};
-	}
-
-
-
-	/**
 	 * {@inheritdoc}
 	 */
 	public function getConfig(array $defaults = NULL, $expand = TRUE)
