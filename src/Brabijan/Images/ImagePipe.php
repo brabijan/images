@@ -144,7 +144,27 @@ class ImagePipe extends Nette\Object
 		return $this;
 	}
 
+	/**
+         * @var string
+         * @return string
+         */
+        public function getFromAbsolutePath($image)
+        {
+                $relativePath = str_replace($this->originalPrefix . '/', '', str_replace($this->assetsDir . '/', '', $image), $count);
 
+                if ($count === 2) {
+                        $relativePath = $this->originalPrefix . '/' . $relativePath;
+                }
+
+                $array = array_reverse(explode('/', $relativePath));
+
+                $name = $array[0];
+                $namespace = isset($array[1]) ? $array[1] : $array[0];
+
+                $this->setNamespace($namespace);
+
+                return $name;
+        }
 
 	/**
 	 * @param string $image
@@ -164,6 +184,11 @@ class ImagePipe extends Nette\Object
 		} elseif (empty($image)) {
 			return "#";
 		}
+		
+		if (strpos($image, $this->wwwDir) !== FALSE) {
+                        $image = $this->getFromAbsolutePath($image);
+                }
+		
 		if ($size === NULL) {
 			return $this->getPath() . "/" . $this->namespace . $this->originalPrefix . "/" . $image;
 		}
