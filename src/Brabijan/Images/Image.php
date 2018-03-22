@@ -10,8 +10,10 @@ use Nette;
  * @property-read string $file
  * @property-read Size $size
  */
-class Image extends Nette\Object
+class Image
 {
+
+	use Nette\SmartObject;
 
 	/** @var string */
 	private $file;

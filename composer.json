@@ -2,8 +2,15 @@
 	"name": "brabijan/images",
 	"type": "library",
 	"description": "Image storage for Nette Framework",
-	"keywords": ["nette", "images"],
-	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
+	"keywords": [
+		"nette",
+		"images"
+	],
+	"license": [
+		"BSD-3-Clause",
+		"GPL-2.0",
+		"GPL-3.0"
+	],
 	"authors": [
 		{
 			"name": "Jan Brabec"
@@ -17,14 +24,11 @@
 		"issues": "https://github.com/brabijan/images/issues"
 	},
 	"require": {
-		"latte/latte": "~2.2",
-        "nette/di": "~2.2",
-        "nette/http": "~2.2",
-        "nette/utils": "~2.2",
-	  	"nette/finder": "~2.2"
-	},
-	"require-dev": {
-		"nette/tester": "@dev"
+		"latte/latte": "~2.4",
+		"nette/di": "~2.4",
+		"nette/http": "~2.4",
+		"nette/utils": "~2.4",
+		"nette/finder": "~2.4"
 	},
 	"autoload": {
 		"psr-0": {

@@ -14,8 +14,6 @@ trait TImagePipe
 	/** @var ImagePipe */
 	public $imgPipe;
 
-
-
 	/**
 	 * @param ImagePipe $imgPipe
 	 */

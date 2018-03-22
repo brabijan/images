@@ -1,6 +1,7 @@
 <?php
 
 namespace Brabijan\Images;
+
 use Nette;
 use Nette\Http\FileUpload;
 use Nette\Utils\Finder;
@@ -10,8 +11,10 @@ use Nette\Utils\Random;
 /**
  * @author Filip Procházka <filip.prochazka@kdyby.org>
  */
-class ImageStorage extends Nette\Object
+class ImageStorage
 {
+
+	use Nette\SmartObject;
 
 	/** @var string */
 	private $imagesDir;
