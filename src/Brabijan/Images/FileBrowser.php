@@ -6,8 +6,10 @@ use Nette;
 use Nette\Utils\Finder;
 use Nette\Utils\Strings;
 
-class FileBrowser extends Nette\Object
+class FileBrowser
 {
+
+	use Nette\SmartObject;
 
 	/** @var string */
 	private $assetsDir;

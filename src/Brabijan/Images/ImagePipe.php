@@ -8,8 +8,10 @@ use Nette\Utils\Image as NImage;
 /**
  * @author Jan Brabec <brabijan@gmail.com>
  */
-class ImagePipe extends Nette\Object
+class ImagePipe
 {
+
+	use Nette\SmartObject;
 
 	/** @var string */
 	protected $assetsDir;
